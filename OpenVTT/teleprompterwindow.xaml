@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window x:Class="OpenVTT.TeleprompterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Teleprompter" Height="600" Width="900" Background="#000" KeyDown="Window_KeyDown">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <!-- Controls -->
+    <DockPanel Grid.Row="0" LastChildFill="False" Margin="6">
+      <Button Click="PlayPause_Click" x:Name="PlayPauseBtn" Content="▶ Play"/>
+      <Button Click="Restart_Click">↺ Restart</Button>
+      <TextBlock Foreground="#EEE" Margin="10,0" VerticalAlignment="Center">Speed</TextBlock>
+      <Slider x:Name="SpeedSlider" Minimum="0" Maximum="600" Value="140" Width="200" ValueChanged="SpeedSlider_ValueChanged"/>
+      <TextBlock Foreground="#EEE" Margin="10,0" VerticalAlignment="Center">Font</TextBlock>
+      <Slider x:Name="FontSlider" Minimum="18" Maximum="96" Value="42" Width="200" ValueChanged="FontSlider_ValueChanged"/>
+      <ToggleButton x:Name="MirrorToggle" Content="Mirror" Checked="MirrorToggle_Checked" Unchecked="MirrorToggle_Checked"/>
+      <Button Click="Fullscreen_Click">⛶ Fullscreen (F11)</Button>
+      <TextBlock Foreground="#AAA" Margin="12,0,0,0" VerticalAlignment="Center">Space: Play/Pause · ↑/↓: Speed · B: Blackout · Esc: Exit</TextBlock>
+    </DockPanel>
+
+    <!-- Teleprompter Text -->
+    <ScrollViewer Grid.Row="1" x:Name="Scroller" VerticalScrollBarVisibility="Hidden" PanningMode="Both">
+      <Viewbox Stretch="Uniform" StretchDirection="DownOnly">
+        <TextBlock x:Name="PromptText" Foreground="#F5F5F5" FontFamily="Segoe UI" TextWrapping="Wrap" TextAlignment="Center" Width="900"/>
+      </Viewbox>
+    </ScrollViewer>
+
+    <!-- Status Bar -->
+    <DockPanel Grid.Row="2" Margin="6">
+      <TextBlock x:Name="Status" Foreground="#AAA"/>
+    </DockPanel>
+  </Grid>
+</Window>
