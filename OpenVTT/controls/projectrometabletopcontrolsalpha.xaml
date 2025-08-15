@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl x:Class="OpenVTT.Controls.Tabletop3DControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             d:DesignWidth="800" d:DesignHeight="600">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <ToolBar>
+      <TextBlock VerticalAlignment="Center">Zoom</TextBlock>
+      <Slider x:Name="Zoom" Minimum="5" Maximum="80" Value="35" Width="180" ValueChanged="Zoom_ValueChanged"/>
+      <Button Click="ResetCam_Click">Reset Camera</Button>
+      <Button Click="AddBoxToken_Click">Add Box Token</Button>
+    </ToolBar>
+
+    <Viewport3D Grid.Row="1" x:Name="View" ClipToBounds="True" MouseDown="View_MouseDown" MouseMove="View_MouseMove" MouseWheel="View_MouseWheel">
+      <Viewport3D.Camera>
+        <PerspectiveCamera x:Name="Cam" Position="0,20,35" LookDirection="0,-15,-30" UpDirection="0,1,0" FieldOfView="60"/>
+      </Viewport3D.Camera>
+      <ModelVisual3D>
+        <ModelVisual3D.Content>
+          <DirectionalLight Color="#FFFFFF" Direction="-1,-3,-2"/>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+      <!-- Ground plane with grid texture -->
+      <ModelVisual3D x:Name="Ground"/>
+      <!-- Token group -->
+      <ModelVisual3D x:Name="Tokens"/>
+    </Viewport3D>
+  </Grid>
+</UserControl>
